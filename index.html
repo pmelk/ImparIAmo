@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImparIAmo - Giochi Educativi Divertenti!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Schermata Selezione Utente -->
+        <div id="user-selection-screen" class="screen active">
+            <div class="container">
+                <h1 class="game-title">🎮 ImparIAmo! 🎮</h1>
+                <p class="subtitle">Scegli il tuo profilo per iniziare!</p>
+
+                <div id="users-list" class="users-grid"></div>
+
+                <button id="add-user-btn" class="btn btn-primary">
+                    ➕ Aggiungi Nuovo Giocatore
+                </button>
+
+                <div id="new-user-form" class="hidden">
+                    <input type="text" id="new-user-name" placeholder="Nome del giocatore" maxlength="15">
+                    <button id="save-user-btn" class="btn btn-success">Salva</button>
+                    <button id="cancel-user-btn" class="btn btn-secondary">Annulla</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schermata Selezione Età -->
+        <div id="age-selection-screen" class="screen">
+            <div class="container">
+                <div class="header-bar">
+                    <button class="btn-back">← Indietro</button>
+                    <div class="user-info">
+                        <span id="current-user-name"></span>
+                        <span class="points-badge">⭐ <span id="header-points">0</span></span>
+                    </div>
+                </div>
+
+                <h1>Quanti anni hai?</h1>
+                <p class="subtitle">Scegli la tua età per giochi adatti a te!</p>
+
+                <div class="age-grid">
+                    <button class="age-btn" data-age="4">4 anni 🐣</button>
+                    <button class="age-btn" data-age="5">5 anni 🦋</button>
+                    <button class="age-btn" data-age="6">6 anni 🌟</button>
+                    <button class="age-btn" data-age="7">7 anni 🚀</button>
+                    <button class="age-btn" data-age="8">8 anni 🎨</button>
+                    <button class="age-btn" data-age="9">9 anni 🎯</button>
+                    <button class="age-btn" data-age="10">10 anni 🏆</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schermata Selezione Materie -->
+        <div id="subject-selection-screen" class="screen">
+            <div class="container">
+                <div class="header-bar">
+                    <button class="btn-back">← Indietro</button>
+                    <div class="user-info">
+                        <span id="current-user-name-2"></span>
+                        <span class="points-badge">⭐ <span id="header-points-2">0</span></span>
+                    </div>
+                </div>
+
+                <h1>Cosa vuoi imparare oggi?</h1>
+                <p class="subtitle">Scegli il tuo gioco preferito!</p>
+
+                <div class="subjects-grid">
+                    <div class="subject-card" data-subject="math">
+                        <div class="subject-icon">🔢</div>
+                        <h3>Matematica</h3>
+                        <p>Somme e sottrazioni divertenti!</p>
+                    </div>
+                    <div class="subject-card" data-subject="letters">
+                        <div class="subject-icon">🔤</div>
+                        <h3>Lettere e Parole</h3>
+                        <p>Forma parole magiche!</p>
+                    </div>
+                    <div class="subject-card" data-subject="logic">
+                        <div class="subject-icon">🧩</div>
+                        <h3>Logica</h3>
+                        <p>Indovinelli e puzzle!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gioco Matematica -->
+        <div id="math-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <button class="btn-back">← Menu</button>
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="math-points">0</span></span>
+                        <span class="stat">Round <span id="math-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <div class="round-progress">
+                    <div class="progress-info">
+                        <span>Progresso Round</span>
+                        <span><span id="math-round-current">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="math-progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">🔢 Matematica Magica</h2>
+
+                <!-- Selezione Operazioni -->
+                <div id="math-operations-selector" class="operations-selector">
+                    <p class="selector-title">Scegli le operazioni da includere:</p>
+                    <div class="operations-grid">
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="op-addition" checked>
+                            <span class="operation-label">➕ Somme</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="op-subtraction" checked>
+                            <span class="operation-label">➖ Sottrazioni</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="op-multiplication">
+                            <span class="operation-label">✖️ Moltiplicazioni</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="op-division">
+                            <span class="operation-label">➗ Divisioni senza resto</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="op-division-remainder">
+                            <span class="operation-label">➗ Divisioni con resto</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="math-question" class="question-box">
+                    <p class="question-text"></p>
+                </div>
+
+                <div id="math-answers" class="answers-grid"></div>
+
+                <div id="math-feedback" class="feedback hidden"></div>
+
+                <div id="math-celebration" class="celebration hidden"></div>
+            </div>
+        </div>
+
+        <!-- Gioco Lettere -->
+        <div id="letters-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <button class="btn-back">← Menu</button>
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="letters-points">0</span></span>
+                        <span class="stat">Round <span id="letters-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <div class="round-progress">
+                    <div class="progress-info">
+                        <span>Progresso Round</span>
+                        <span><span id="letters-round-current">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="letters-progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">🔤 Caccia alle Parole</h2>
+
+                <div class="letters-container">
+                    <p class="instruction">Forma TUTTE le parole che riesci con queste lettere!</p>
+                    <div id="available-letters" class="letters-box"></div>
+
+                    <div id="word-construction" class="word-box"></div>
+
+                    <div class="game-controls">
+                        <button id="clear-word-btn" class="btn btn-secondary">🔄 Cancella</button>
+                        <button id="submit-word-btn" class="btn btn-success">✓ Conferma Parola</button>
+                        <button id="next-letters-btn" class="btn btn-primary">➡️ Nuove Lettere</button>
+                    </div>
+
+                    <div id="letters-feedback" class="feedback hidden"></div>
+                    <div id="words-found-list" class="words-found"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gioco Logica -->
+        <div id="logic-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <button class="btn-back">← Menu</button>
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="logic-points">0</span></span>
+                        <span class="stat">Round <span id="logic-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <div class="round-progress">
+                    <div class="progress-info">
+                        <span>Progresso Round</span>
+                        <span><span id="logic-round-current">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="logic-progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">🧩 Sfida di Logica</h2>
+
+                <div id="logic-question" class="question-box">
+                    <p class="question-text"></p>
+                </div>
+
+                <div id="logic-interactive" class="logic-area"></div>
+
+                <div id="logic-feedback" class="feedback hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio per i suoni -->
+    <audio id="correct-sound" preload="auto"></audio>
+    <audio id="wrong-sound" preload="auto"></audio>
+    <audio id="celebration-sound" preload="auto"></audio>
+
+    <script src="app.js"></script>
+    <script src="rounds.js"></script>
+    <script src="temporal_sequence.js"></script>
+</body>
+</html>

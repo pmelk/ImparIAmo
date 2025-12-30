@@ -1,0 +1,159 @@
+// ===== SISTEMA A ROUND - ImparIAmo =====
+// Gestisce round di 10 domande con barra di progresso per tutti i giochi
+
+// Funzione per aggiornare la barra di progresso
+function updateRoundProgress(gameType) {
+    const game = gameType === 'math' ? MathGame :
+                 gameType === 'letters' ? LettersGame : LogicGame;
+
+    const progress = game.roundProgress || 0;
+    const percentage = (progress / 10) * 100;
+
+    // Aggiorna UI
+    const currentEl = document.getElementById(`${gameType}-round-current`);
+    const numberEl = document.getElementById(`${gameType}-round-number`);
+    const progressFill = document.getElementById(`${gameType}-progress-fill`);
+
+    if (currentEl) currentEl.textContent = progress;
+    if (numberEl) numberEl.textContent = game.roundNumber || 1;
+
+    if (progressFill) {
+        progressFill.style.width = percentage + '%';
+
+        // Animazione completamento
+        if (progress === 10) {
+            progressFill.classList.add('complete');
+        } else {
+            progressFill.classList.remove('complete');
+        }
+    }
+}
+
+// Funzione per mostrare premio round completato
+function showRoundComplete(gameType) {
+    const game = gameType === 'math' ? MathGame :
+                 gameType === 'letters' ? LettersGame : LogicGame;
+
+    const bonusPoints = game.roundNumber * 50;
+    updateUserPoints(bonusPoints);
+
+    const message = `
+        🎉 ROUND ${game.roundNumber} COMPLETATO! 🎉
+        <br><br>
+        🏆 Bonus Round: +${bonusPoints} punti!
+        <br><br>
+        🌟 Inizia il Round ${game.roundNumber + 1}!
+    `;
+
+    showCelebration(message);
+
+    // Avanza al prossimo round dopo 3 secondi
+    setTimeout(() => {
+        game.roundNumber++;
+        game.roundProgress = 0;
+        updateRoundProgress(gameType);
+
+        // Nascondi celebration
+        const celebration = document.getElementById(`${gameType}-celebration`);
+        if (celebration) {
+            celebration.classList.add('hidden');
+        }
+    }, 3000);
+}
+
+// Incrementa progresso per il gioco di Matematica
+function incrementMathProgress() {
+    if (!MathGame.roundProgress) MathGame.roundProgress = 0;
+    if (MathGame.roundProgress < 10) {
+        MathGame.roundProgress++;
+        updateRoundProgress('math');
+
+        if (MathGame.roundProgress === 10) {
+            showRoundComplete('math');
+        }
+    }
+}
+
+// Incrementa progresso per il gioco di Lettere
+function incrementLettersProgress() {
+    if (!LettersGame.roundProgress) LettersGame.roundProgress = 0;
+    if (LettersGame.roundProgress < 10) {
+        LettersGame.roundProgress++;
+        updateRoundProgress('letters');
+
+        if (LettersGame.roundProgress === 10) {
+            showRoundComplete('letters');
+        }
+    }
+}
+
+// Incrementa progresso per il gioco di Logica
+function incrementLogicProgress() {
+    if (!LogicGame.roundProgress) LogicGame.roundProgress = 0;
+    if (LogicGame.roundProgress < 10) {
+        LogicGame.roundProgress++;
+        updateRoundProgress('logic');
+
+        if (LogicGame.roundProgress === 10) {
+            showRoundComplete('logic');
+        }
+    }
+}
+
+// Resetta round quando si inizia un nuovo gioco
+function resetRound(gameType) {
+    const game = gameType === 'math' ? MathGame :
+                 gameType === 'letters' ? LettersGame : LogicGame;
+
+    game.roundNumber = 1;
+    game.roundProgress = 0;
+    updateRoundProgress(gameType);
+}
+
+// Inizializza il sistema quando il DOM è pronto
+window.addEventListener('DOMContentLoaded', function() {
+    // Aggiungi proprietà round agli oggetti di gioco
+    if (typeof MathGame !== 'undefined') {
+        MathGame.roundNumber = 1;
+        MathGame.roundProgress = 0;
+    }
+
+    if (typeof LettersGame !== 'undefined') {
+        LettersGame.roundNumber = 1;
+        LettersGame.roundProgress = 0;
+    }
+
+    if (typeof LogicGame !== 'undefined') {
+        LogicGame.roundNumber = 1;
+        LogicGame.roundProgress = 0;
+    }
+
+    // Override funzioni init per resettare il round
+    setTimeout(function() {
+        if (typeof initMathGame !== 'undefined') {
+            const originalInitMathGame = initMathGame;
+            window.initMathGame = function() {
+                originalInitMathGame();
+                resetRound('math');
+            };
+        }
+
+        if (typeof initLettersGame !== 'undefined') {
+            const originalInitLettersGame = initLettersGame;
+            window.initLettersGame = function() {
+                originalInitLettersGame();
+                resetRound('letters');
+            };
+        }
+
+        if (typeof initLogicGame !== 'undefined') {
+            const originalInitLogicGame = initLogicGame;
+            window.initLogicGame = function() {
+                originalInitLogicGame();
+                resetRound('logic');
+            };
+        }
+
+        console.log('✅ Sistema a Round inizializzato');
+    }, 100);
+});
