@@ -4,7 +4,9 @@
 // Funzione per aggiornare la barra di progresso
 function updateRoundProgress(gameType) {
     const game = gameType === 'math' ? MathGame :
-                 gameType === 'letters' ? LettersGame : LogicGame;
+                 gameType === 'letters' ? LettersGame :
+                 gameType === 'logic' ? LogicGame :
+                 gameType === 'imageguess' ? ImageGuessGame : null;
 
     const progress = game.roundProgress || 0;
     const percentage = (progress / 10) * 100;
@@ -32,7 +34,9 @@ function updateRoundProgress(gameType) {
 // Funzione per mostrare premio round completato
 function showRoundComplete(gameType) {
     const game = gameType === 'math' ? MathGame :
-                 gameType === 'letters' ? LettersGame : LogicGame;
+                 gameType === 'letters' ? LettersGame :
+                 gameType === 'logic' ? LogicGame :
+                 gameType === 'imageguess' ? ImageGuessGame : null;
 
     const bonusPoints = game.roundNumber * 50;
     updateUserPoints(bonusPoints);
@@ -100,10 +104,25 @@ function incrementLogicProgress() {
     }
 }
 
+// Incrementa progresso per il gioco Scopri la Parola
+function incrementImageGuessProgress() {
+    if (!ImageGuessGame.roundProgress) ImageGuessGame.roundProgress = 0;
+    if (ImageGuessGame.roundProgress < 10) {
+        ImageGuessGame.roundProgress++;
+        updateRoundProgress('imageguess');
+
+        if (ImageGuessGame.roundProgress === 10) {
+            showRoundComplete('imageguess');
+        }
+    }
+}
+
 // Resetta round quando si inizia un nuovo gioco
 function resetRound(gameType) {
     const game = gameType === 'math' ? MathGame :
-                 gameType === 'letters' ? LettersGame : LogicGame;
+                 gameType === 'letters' ? LettersGame :
+                 gameType === 'logic' ? LogicGame :
+                 gameType === 'imageguess' ? ImageGuessGame : null;
 
     game.roundNumber = 1;
     game.roundProgress = 0;
@@ -126,6 +145,11 @@ window.addEventListener('DOMContentLoaded', function() {
     if (typeof LogicGame !== 'undefined') {
         LogicGame.roundNumber = 1;
         LogicGame.roundProgress = 0;
+    }
+
+    if (typeof ImageGuessGame !== 'undefined') {
+        ImageGuessGame.roundNumber = 1;
+        ImageGuessGame.roundProgress = 0;
     }
 
     // Override funzioni init per resettare il round
@@ -151,6 +175,14 @@ window.addEventListener('DOMContentLoaded', function() {
             window.initLogicGame = function() {
                 originalInitLogicGame();
                 resetRound('logic');
+            };
+        }
+
+        if (typeof initImageGuessGame !== 'undefined') {
+            const originalInitImageGuessGame = initImageGuessGame;
+            window.initImageGuessGame = function() {
+                originalInitImageGuessGame();
+                resetRound('imageguess');
             };
         }
 

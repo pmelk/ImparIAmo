@@ -84,6 +84,11 @@
                         <h3>Logica</h3>
                         <p>Indovinelli e puzzle!</p>
                     </div>
+                    <div class="subject-card" data-subject="imageguess">
+                        <div class="subject-icon">🖼️</div>
+                        <h3>Scopri la Parola</h3>
+                        <p>Indovina le parole dalle immagini!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -221,6 +226,47 @@
                 <div id="logic-interactive" class="logic-area"></div>
 
                 <div id="logic-feedback" class="feedback hidden"></div>
+            </div>
+        </div>
+
+        <!-- Gioco Scopri la Parola -->
+        <div id="imageguess-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <button class="btn-back">← Menu</button>
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="imageguess-points">0</span></span>
+                        <span class="stat">Round <span id="imageguess-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <div class="round-progress">
+                    <div class="progress-info">
+                        <span>Progresso Round</span>
+                        <span><span id="imageguess-round-current">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="imageguess-progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">🖼️ Scopri la Parola</h2>
+
+                <div class="imageguess-container">
+                    <p class="instruction">Indovina la parola selezionando le lettere!</p>
+
+                    <div id="image-guess-emoji" class="emoji-display"></div>
+
+                    <div id="imageguess-word-construction" class="word-box"></div>
+
+                    <div id="imageguess-available-letters" class="letters-box"></div>
+
+                    <div class="game-controls">
+                        <button id="clear-imageguess-btn" class="btn btn-secondary">🔄 Cancella</button>
+                    </div>
+
+                    <div id="imageguess-feedback" class="feedback hidden"></div>
+                </div>
             </div>
         </div>
     </div>
