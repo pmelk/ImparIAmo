@@ -7,7 +7,8 @@ function updateRoundProgress(gameType) {
                  gameType === 'tabelline' ? TabellineGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
-                 gameType === 'imageguess' ? ImageGuessGame : null;
+                 gameType === 'imageguess' ? ImageGuessGame :
+                 gameType === 'english' ? EnglishGame : null;
 
     const progress = game.roundProgress || 0;
     const percentage = (progress / 10) * 100;
@@ -38,7 +39,8 @@ function showRoundComplete(gameType) {
                  gameType === 'tabelline' ? TabellineGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
-                 gameType === 'imageguess' ? ImageGuessGame : null;
+                 gameType === 'imageguess' ? ImageGuessGame :
+                 gameType === 'english' ? EnglishGame : null;
 
     const bonusPoints = game.roundNumber * 50;
     updateUserPoints(bonusPoints, gameType);
@@ -138,13 +140,27 @@ function incrementImageGuessProgress() {
     }
 }
 
+// Incrementa progresso per il gioco Inglese
+function incrementEnglishProgress() {
+    if (!EnglishGame.roundProgress) EnglishGame.roundProgress = 0;
+    if (EnglishGame.roundProgress < 10) {
+        EnglishGame.roundProgress++;
+        updateRoundProgress('english');
+
+        if (EnglishGame.roundProgress === 10) {
+            showRoundComplete('english');
+        }
+    }
+}
+
 // Resetta round quando si inizia un nuovo gioco
 function resetRound(gameType) {
     const game = gameType === 'math' ? MathGame :
                  gameType === 'tabelline' ? TabellineGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
-                 gameType === 'imageguess' ? ImageGuessGame : null;
+                 gameType === 'imageguess' ? ImageGuessGame :
+                 gameType === 'english' ? EnglishGame : null;
 
     game.roundNumber = 1;
     game.roundProgress = 0;
@@ -177,6 +193,11 @@ window.addEventListener('DOMContentLoaded', function() {
     if (typeof ImageGuessGame !== 'undefined') {
         ImageGuessGame.roundNumber = 1;
         ImageGuessGame.roundProgress = 0;
+    }
+
+    if (typeof EnglishGame !== 'undefined') {
+        EnglishGame.roundNumber = 1;
+        EnglishGame.roundProgress = 0;
     }
 
     // Override funzioni init per resettare il round
@@ -218,6 +239,14 @@ window.addEventListener('DOMContentLoaded', function() {
             window.initImageGuessGame = function() {
                 originalInitImageGuessGame();
                 resetRound('imageguess');
+            };
+        }
+
+        if (typeof initEnglishGame !== 'undefined') {
+            const originalInitEnglishGame = initEnglishGame;
+            window.initEnglishGame = function() {
+                originalInitEnglishGame();
+                resetRound('english');
             };
         }
 

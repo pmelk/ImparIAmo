@@ -88,6 +88,13 @@
                         <div class="category-points">⭐ <span id="points-logica">0</span></div>
                     </div>
 
+                    <div class="category-card category-lingue" data-category="lingue">
+                        <div class="category-icon">🌍</div>
+                        <h3>Lingue</h3>
+                        <p>Impara nuove lingue!</p>
+                        <div class="category-points">⭐ <span id="points-lingue">0</span></div>
+                    </div>
+
                     <div class="category-card category-varie" data-category="varie">
                         <div class="category-icon">🎮</div>
                         <h3>Varie</h3>
@@ -194,6 +201,11 @@
                                 <span class="stat-points" id="profile-points-logica">0</span>
                             </div>
                             <div class="stat-card">
+                                <span class="stat-icon">🌍</span>
+                                <span class="stat-name">Lingue</span>
+                                <span class="stat-points" id="profile-points-lingue">0</span>
+                            </div>
+                            <div class="stat-card">
                                 <span class="stat-icon">🎮</span>
                                 <span class="stat-name">Varie</span>
                                 <span class="stat-points" id="profile-points-varie">0</span>
@@ -223,6 +235,10 @@
                             <div class="stat-row">
                                 <span class="game-name">🧩 Sfida di Logica</span>
                                 <span class="game-points" id="profile-game-logic">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="game-name">🇬🇧 Impara l'Inglese</span>
+                                <span class="game-points" id="profile-game-english">0</span>
                             </div>
                         </div>
                     </div>
@@ -509,6 +525,67 @@
 
                     <div id="imageguess-feedback" class="feedback hidden"></div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Gioco Inglese -->
+        <div id="english-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <button class="btn-back">← Menu</button>
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="english-points">0</span></span>
+                        <span class="stat">Round <span id="english-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <div class="round-progress">
+                    <div class="progress-info">
+                        <span>Progresso Round</span>
+                        <span><span id="english-round-current">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="english-progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">🇬🇧 Impara l'Inglese</h2>
+
+                <!-- Selettore Tema -->
+                <div id="english-topic-selector" class="topic-selector">
+                    <p class="instruction">Scegli un argomento per iniziare!</p>
+                    <div class="topics-grid">
+                        <button class="topic-btn" data-topic="numbers">🔢 Numeri</button>
+                        <button class="topic-btn" data-topic="colors">🎨 Colori</button>
+                        <button class="topic-btn" data-topic="animals">🐾 Animali</button>
+                        <button class="topic-btn" data-topic="objects">📦 Oggetti</button>
+                        <button class="topic-btn" data-topic="family">👨‍👩‍👧‍👦 Famiglia</button>
+                        <button class="topic-btn" data-topic="food">🍕 Cibo</button>
+                    </div>
+                </div>
+
+                <!-- Area di Gioco -->
+                <div id="english-game-area" class="english-container hidden">
+                    <div class="current-topic-badge">
+                        <span id="current-topic-label"></span>
+                        <button id="change-topic-btn" class="btn-mini">🔄 Cambia</button>
+                    </div>
+
+                    <div id="english-emoji-display" class="emoji-display-large"></div>
+
+                    <div class="pronunciation-area">
+                        <button id="pronounce-btn" class="btn-pronounce">🔊 Ascolta</button>
+                        <div id="english-word-display" class="english-word hidden"></div>
+                    </div>
+
+                    <p class="instruction">Qual è la parola in inglese?</p>
+
+                    <div id="english-answers" class="answers-grid"></div>
+
+                    <div id="english-feedback" class="feedback hidden"></div>
+                </div>
+
+                <div id="english-celebration" class="celebration hidden"></div>
             </div>
         </div>
     </div>
