@@ -22,8 +22,210 @@
 
                 <div id="new-user-form" class="hidden">
                     <input type="text" id="new-user-name" placeholder="Nome del giocatore" maxlength="15">
+
+                    <select id="new-user-age" class="age-select">
+                        <option value="">Seleziona età</option>
+                        <option value="4">4 anni 🐣</option>
+                        <option value="5">5 anni 🦋</option>
+                        <option value="6">6 anni 🌟</option>
+                        <option value="7">7 anni 🚀</option>
+                        <option value="8">8 anni 🎨</option>
+                        <option value="9">9 anni 🎯</option>
+                        <option value="10">10 anni 🏆</option>
+                    </select>
+
+                    <select id="new-user-avatar" class="avatar-select">
+                        <option value="">Scegli avatar</option>
+                        <option value="🦁">🦁 Leone</option>
+                        <option value="🐼">🐼 Panda</option>
+                        <option value="🐨">🐨 Koala</option>
+                        <option value="🦊">🦊 Volpe</option>
+                        <option value="🐯">🐯 Tigre</option>
+                        <option value="🐸">🐸 Rana</option>
+                        <option value="🐰">🐰 Coniglio</option>
+                        <option value="🐻">🐻 Orso</option>
+                    </select>
+
                     <button id="save-user-btn" class="btn btn-success">Salva</button>
                     <button id="cancel-user-btn" class="btn btn-secondary">Annulla</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schermata Selezione Categorie -->
+        <div id="categories-selection-screen" class="screen">
+            <div class="container">
+                <div class="header-bar">
+                    <button class="btn-back">← Indietro</button>
+                    <div class="user-info">
+                        <span id="current-user-name-categories" class="clickable-username"></span>
+                        <span class="points-badge">⭐ <span id="header-points-categories">0</span></span>
+                    </div>
+                </div>
+
+                <h1>Scegli una Categoria</h1>
+                <p class="subtitle">Quale argomento vuoi esplorare oggi?</p>
+
+                <div class="categories-grid">
+                    <div class="category-card category-numeri" data-category="numeri">
+                        <div class="category-icon">🔢</div>
+                        <h3>Numeri</h3>
+                        <p>Matematica e calcoli!</p>
+                        <div class="category-points">⭐ <span id="points-numeri">0</span></div>
+                    </div>
+
+                    <div class="category-card category-lettere" data-category="lettere">
+                        <div class="category-icon">🔤</div>
+                        <h3>Lettere</h3>
+                        <p>Parole e linguaggio!</p>
+                        <div class="category-points">⭐ <span id="points-lettere">0</span></div>
+                    </div>
+
+                    <div class="category-card category-logica" data-category="logica">
+                        <div class="category-icon">🧩</div>
+                        <h3>Logica</h3>
+                        <p>Enigmi e puzzle!</p>
+                        <div class="category-points">⭐ <span id="points-logica">0</span></div>
+                    </div>
+
+                    <div class="category-card category-varie" data-category="varie">
+                        <div class="category-icon">🎮</div>
+                        <h3>Varie</h3>
+                        <p>Giochi in arrivo...</p>
+                        <div class="category-status">🚧 In costruzione</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schermata Selezione Giochi -->
+        <div id="games-selection-screen" class="screen">
+            <div class="container">
+                <div class="header-bar">
+                    <button class="btn-back">← Categorie</button>
+                    <div class="user-info">
+                        <span id="current-user-name-games" class="clickable-username"></span>
+                        <span class="points-badge">⭐ <span id="header-points-games">0</span></span>
+                    </div>
+                </div>
+
+                <h1 id="games-category-title">Giochi</h1>
+                <p class="subtitle">Scegli il gioco che preferisci!</p>
+
+                <div id="games-grid" class="games-grid">
+                    <!-- Popolato dinamicamente -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Schermata Profilo Utente -->
+        <div id="user-profile-screen" class="screen">
+            <div class="container">
+                <div class="header-bar">
+                    <button class="btn-back">← Indietro</button>
+                    <h2 class="profile-header">Il Tuo Profilo</h2>
+                </div>
+
+                <!-- Sezione Dati Utente -->
+                <div class="profile-section">
+                    <h3>📝 Informazioni</h3>
+                    <div class="profile-info">
+                        <div class="profile-avatar-display" id="profile-avatar-display">🦁</div>
+                        <div class="profile-field">
+                            <label>Nome:</label>
+                            <input type="text" id="profile-name-input" maxlength="15" />
+                        </div>
+                        <div class="profile-field">
+                            <label>Età:</label>
+                            <select id="profile-age-input">
+                                <option value="4">4 anni 🐣</option>
+                                <option value="5">5 anni 🦋</option>
+                                <option value="6">6 anni 🌟</option>
+                                <option value="7">7 anni 🚀</option>
+                                <option value="8">8 anni 🎨</option>
+                                <option value="9">9 anni 🎯</option>
+                                <option value="10">10 anni 🏆</option>
+                            </select>
+                        </div>
+                        <div class="profile-field">
+                            <label>Avatar:</label>
+                            <select id="profile-avatar-input">
+                                <option value="🦁">🦁 Leone</option>
+                                <option value="🐼">🐼 Panda</option>
+                                <option value="🐨">🐨 Koala</option>
+                                <option value="🦊">🦊 Volpe</option>
+                                <option value="🐯">🐯 Tigre</option>
+                                <option value="🐸">🐸 Rana</option>
+                                <option value="🐰">🐰 Coniglio</option>
+                                <option value="🐻">🐻 Orso</option>
+                            </select>
+                        </div>
+                        <button id="save-profile-btn" class="btn btn-success">💾 Salva Modifiche</button>
+                    </div>
+                </div>
+
+                <!-- Sezione Statistiche -->
+                <div class="profile-section">
+                    <h3>📊 Statistiche</h3>
+
+                    <div class="stats-total">
+                        <div class="stat-big">
+                            <span class="stat-label">Punti Totali</span>
+                            <span class="stat-value" id="profile-total-points">0</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-categories">
+                        <h4>Punti per Categoria</h4>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-icon">🔢</span>
+                                <span class="stat-name">Numeri</span>
+                                <span class="stat-points" id="profile-points-numeri">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">🔤</span>
+                                <span class="stat-name">Lettere</span>
+                                <span class="stat-points" id="profile-points-lettere">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">🧩</span>
+                                <span class="stat-name">Logica</span>
+                                <span class="stat-points" id="profile-points-logica">0</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-icon">🎮</span>
+                                <span class="stat-name">Varie</span>
+                                <span class="stat-points" id="profile-points-varie">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stats-games">
+                        <h4>Punti per Gioco</h4>
+                        <div class="stats-list">
+                            <div class="stat-row">
+                                <span class="game-name">🔢 Matematica Magica</span>
+                                <span class="game-points" id="profile-game-math">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="game-name">✖️ Tabelline</span>
+                                <span class="game-points" id="profile-game-tabelline">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="game-name">🔤 Lettere e Parole</span>
+                                <span class="game-points" id="profile-game-letters">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="game-name">🖼️ Scopri la Parola</span>
+                                <span class="game-points" id="profile-game-imageguess">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="game-name">🧩 Sfida di Logica</span>
+                                <span class="game-points" id="profile-game-logic">0</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,8 +318,13 @@
 
                 <h2 class="game-title-small">🔢 Matematica Magica</h2>
 
-                <!-- Selezione Operazioni -->
-                <div id="math-operations-selector" class="operations-selector">
+                <!-- Pulsante per mostrare/nascondere opzioni -->
+                <button id="toggle-operations-btn" class="btn btn-secondary toggle-operations-btn">
+                    ⚙️ Opzioni
+                </button>
+
+                <!-- Selezione Operazioni (nascosto inizialmente) -->
+                <div id="math-operations-selector" class="operations-selector hidden">
                     <p class="selector-title">Scegli le operazioni da includere:</p>
                     <div class="operations-grid">
                         <label class="operation-checkbox">
@@ -152,6 +359,41 @@
                 <div id="math-feedback" class="feedback hidden"></div>
 
                 <div id="math-celebration" class="celebration hidden"></div>
+            </div>
+        </div>
+
+        <!-- Gioco Tabelline -->
+        <div id="tabelline-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <button class="btn-back">← Menu</button>
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="tabelline-points">0</span></span>
+                        <span class="stat">Round <span id="tabelline-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <div class="round-progress">
+                    <div class="progress-info">
+                        <span>Progresso Round</span>
+                        <span><span id="tabelline-round-current">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="tabelline-progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">✖️ Tabelline</h2>
+
+                <div id="tabelline-question" class="question-box">
+                    <p class="question-text"></p>
+                </div>
+
+                <div id="tabelline-answers" class="answers-grid"></div>
+
+                <div id="tabelline-feedback" class="feedback hidden"></div>
+
+                <div id="tabelline-celebration" class="celebration hidden"></div>
             </div>
         </div>
 

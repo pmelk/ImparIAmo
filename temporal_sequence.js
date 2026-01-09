@@ -342,7 +342,7 @@ function checkTwoChoices(selectedIndex) {
         feedbackDiv.innerHTML = '✅ <strong>Esatto!</strong><br>' +
             '<span style="font-size: 14px;">' + sequence.explanation + '</span>';
 
-        updateUserPoints(20);
+        updateUserPoints(20, 'logic');
         updateLogicStats();
 
         setTimeout(() => {
@@ -390,7 +390,7 @@ function checkSequence() {
         feedbackDiv.innerHTML = '✅ <strong>Perfetto!</strong><br>' +
             '<span style="font-size: 14px;">' + sequence.explanation + '</span>';
 
-        updateUserPoints(20);
+        updateUserPoints(20, 'logic');
         updateLogicStats();
 
         setTimeout(() => {

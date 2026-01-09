@@ -4,6 +4,7 @@
 // Funzione per aggiornare la barra di progresso
 function updateRoundProgress(gameType) {
     const game = gameType === 'math' ? MathGame :
+                 gameType === 'tabelline' ? TabellineGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame : null;
@@ -34,12 +35,13 @@ function updateRoundProgress(gameType) {
 // Funzione per mostrare premio round completato
 function showRoundComplete(gameType) {
     const game = gameType === 'math' ? MathGame :
+                 gameType === 'tabelline' ? TabellineGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame : null;
 
     const bonusPoints = game.roundNumber * 50;
-    updateUserPoints(bonusPoints);
+    updateUserPoints(bonusPoints, gameType);
 
     const message = `
         🎉 ROUND ${game.roundNumber} COMPLETATO! 🎉
@@ -74,6 +76,25 @@ function incrementMathProgress() {
 
         if (MathGame.roundProgress === 10) {
             showRoundComplete('math');
+        }
+    }
+}
+
+// Incrementa progresso per il gioco Tabelline
+function incrementTabellineProgress() {
+    if (!TabellineGame.roundProgress) TabellineGame.roundProgress = 0;
+    if (TabellineGame.roundProgress < 10) {
+        TabellineGame.roundProgress++;
+        updateRoundProgress('tabelline');
+
+        // Reset della coda delle domande sbagliate e del contatore a ogni nuovo round
+        if (TabellineGame.roundProgress === 1) {
+            TabellineGame.questionsAsked = 0;
+            TabellineGame.wrongQuestions = [];
+        }
+
+        if (TabellineGame.roundProgress === 10) {
+            showRoundComplete('tabelline');
         }
     }
 }
@@ -120,6 +141,7 @@ function incrementImageGuessProgress() {
 // Resetta round quando si inizia un nuovo gioco
 function resetRound(gameType) {
     const game = gameType === 'math' ? MathGame :
+                 gameType === 'tabelline' ? TabellineGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame : null;
@@ -135,6 +157,11 @@ window.addEventListener('DOMContentLoaded', function() {
     if (typeof MathGame !== 'undefined') {
         MathGame.roundNumber = 1;
         MathGame.roundProgress = 0;
+    }
+
+    if (typeof TabellineGame !== 'undefined') {
+        TabellineGame.roundNumber = 1;
+        TabellineGame.roundProgress = 0;
     }
 
     if (typeof LettersGame !== 'undefined') {
@@ -159,6 +186,14 @@ window.addEventListener('DOMContentLoaded', function() {
             window.initMathGame = function() {
                 originalInitMathGame();
                 resetRound('math');
+            };
+        }
+
+        if (typeof initTabellineGame !== 'undefined') {
+            const originalInitTabellineGame = initTabellineGame;
+            window.initTabellineGame = function() {
+                originalInitTabellineGame();
+                resetRound('tabelline');
             };
         }
 
