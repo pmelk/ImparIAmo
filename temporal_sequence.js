@@ -345,8 +345,17 @@ function checkTwoChoices(selectedIndex) {
         updateUserPoints(20, 'logic');
         updateLogicStats();
 
+        // Mostra bottone "Prossimo Gioco"
+        const nextBtn = document.getElementById('logic-next-btn');
+        if (nextBtn) {
+            nextBtn.classList.remove('hidden');
+        }
+
         setTimeout(() => {
             feedbackDiv.classList.add('hidden');
+            if (nextBtn) {
+                nextBtn.classList.add('hidden');
+            }
             generateLogicQuestion();
         }, 3500);
 
@@ -359,8 +368,13 @@ function checkTwoChoices(selectedIndex) {
 
         updateLogicStats();
 
+        // Mostra bottone anche per risposte sbagliate
+        const nextBtn = document.getElementById('logic-next-btn');
         setTimeout(() => {
             feedbackDiv.classList.add('hidden');
+            if (nextBtn) {
+                nextBtn.classList.remove('hidden');
+            }
         }, 2000);
     }
 
@@ -393,8 +407,17 @@ function checkSequence() {
         updateUserPoints(20, 'logic');
         updateLogicStats();
 
+        // Mostra bottone "Prossimo Gioco"
+        const nextBtn = document.getElementById('logic-next-btn');
+        if (nextBtn) {
+            nextBtn.classList.remove('hidden');
+        }
+
         setTimeout(() => {
             feedbackDiv.classList.add('hidden');
+            if (nextBtn) {
+                nextBtn.classList.add('hidden');
+            }
             generateLogicQuestion();
         }, 4000);
 
@@ -407,9 +430,14 @@ function checkSequence() {
 
         updateLogicStats();
 
+        // Mostra bottone anche per risposte sbagliate
+        const nextBtn = document.getElementById('logic-next-btn');
         setTimeout(() => {
             feedbackDiv.classList.add('hidden');
             resetSequence();
+            if (nextBtn) {
+                nextBtn.classList.remove('hidden');
+            }
         }, 2500);
     }
 

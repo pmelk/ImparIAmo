@@ -59,6 +59,12 @@ function showRoundComplete(gameType) {
     setTimeout(() => {
         game.roundNumber++;
         game.roundProgress = 0;
+
+        // Reset array domande già chieste per il nuovo round
+        if (game.askedThisRound) {
+            game.askedThisRound = [];
+        }
+
         updateRoundProgress(gameType);
 
         // Nascondi celebration
