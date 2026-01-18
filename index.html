@@ -544,7 +544,7 @@
                 <div class="round-progress">
                     <div class="progress-info">
                         <span>Progresso Round</span>
-                        <span><span id="english-round-current">0</span>/10</span>
+                        <span><span id="english-round-current">0</span>/<span id="english-round-total">10</span></span>
                     </div>
                     <div class="progress-bar">
                         <div id="english-progress-fill" class="progress-fill" style="width: 0%"></div>
@@ -563,6 +563,7 @@
                         <button class="topic-btn" data-topic="objects">📦 Oggetti</button>
                         <button class="topic-btn" data-topic="family">👨‍👩‍👧‍👦 Famiglia</button>
                         <button class="topic-btn" data-topic="food">🍕 Cibo</button>
+                        <button class="topic-btn" data-topic="months">📅 Mesi</button>
                     </div>
                 </div>
 
@@ -574,6 +575,7 @@
                     </div>
 
                     <div id="english-emoji-display" class="emoji-display-large"></div>
+                    <div id="english-italian-name" class="italian-name-display hidden"></div>
 
                     <div class="pronunciation-area">
                         <button id="pronounce-btn" class="btn-pronounce">🔊 Ascolta</button>
@@ -584,7 +586,18 @@
 
                     <div id="english-answers" class="answers-grid"></div>
 
+                    <!-- Input per scrivere la risposta (tema mesi) -->
+                    <div id="english-input-container" class="english-input-container hidden">
+                        <input type="text" id="english-text-input" class="english-text-input" placeholder="Scrivi la parola in inglese..." maxlength="20" autocomplete="off">
+                        <button id="english-check-btn" class="btn btn-primary">✓ Verifica</button>
+                    </div>
+
                     <div id="english-feedback" class="feedback hidden"></div>
+                </div>
+
+                <!-- Feedback Overlay -->
+                <div id="english-feedback-overlay" class="feedback-overlay hidden">
+                    <div class="feedback-overlay-content"></div>
                 </div>
 
                 <div id="english-celebration" class="celebration hidden"></div>

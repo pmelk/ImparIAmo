@@ -11,7 +11,13 @@ function updateRoundProgress(gameType) {
                  gameType === 'english' ? EnglishGame : null;
 
     const progress = game.roundProgress || 0;
-    const percentage = (progress / 10) * 100;
+
+    // Per inglese usa roundTotalQuestions, per altri giochi usa 10
+    const totalQuestions = (gameType === 'english' && game.roundTotalQuestions)
+        ? game.roundTotalQuestions
+        : 10;
+
+    const percentage = (progress / totalQuestions) * 100;
 
     // Aggiorna UI
     const currentEl = document.getElementById(`${gameType}-round-current`);
@@ -25,7 +31,7 @@ function updateRoundProgress(gameType) {
         progressFill.style.width = percentage + '%';
 
         // Animazione completamento
-        if (progress === 10) {
+        if (progress === totalQuestions) {
             progressFill.classList.add('complete');
         } else {
             progressFill.classList.remove('complete');
@@ -149,14 +155,104 @@ function incrementImageGuessProgress() {
 // Incrementa progresso per il gioco Inglese
 function incrementEnglishProgress() {
     if (!EnglishGame.roundProgress) EnglishGame.roundProgress = 0;
-    if (EnglishGame.roundProgress < 10) {
+    const totalQuestions = EnglishGame.roundTotalQuestions || 10;
+
+    if (EnglishGame.roundProgress < totalQuestions) {
         EnglishGame.roundProgress++;
         updateRoundProgress('english');
 
-        if (EnglishGame.roundProgress === 10) {
-            showRoundComplete('english');
+        if (EnglishGame.roundProgress === totalQuestions) {
+            showEnglishRoundComplete();
         }
     }
+}
+
+// Mostra completamento round per gioco Inglese con statistiche
+function showEnglishRoundComplete() {
+    const correct = EnglishGame.roundCorrectAnswers;
+    const wrong = EnglishGame.roundWrongAnswers;
+    const total = correct + wrong;
+    const percentage = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+    // Determina il messaggio in base alla percentuale
+    let emoji = '';
+    let title = '';
+    let encouragement = '';
+    let bonusPoints = 0;
+
+    if (percentage === 100) {
+        emoji = '🌟🎊🏆';
+        title = 'PERFETTO!!!';
+        encouragement = 'Hai risposto correttamente a TUTTE le domande!<br>Sei un vero campione di inglese! 🌟';
+        bonusPoints = EnglishGame.roundNumber * 100; // Bonus extra per 100%
+    } else if (percentage >= 90) {
+        emoji = '🎉✨';
+        title = 'ECCELLENTE!';
+        encouragement = 'Quasi perfetto! Continua così!';
+        bonusPoints = EnglishGame.roundNumber * 75;
+    } else if (percentage >= 80) {
+        emoji = '👏🌟';
+        title = 'OTTIMO LAVORO!';
+        encouragement = 'Hai fatto davvero bene!';
+        bonusPoints = EnglishGame.roundNumber * 60;
+    } else if (percentage >= 70) {
+        emoji = '👍';
+        title = 'BRAVO!';
+        encouragement = 'Buon lavoro, continua a esercitarti!';
+        bonusPoints = EnglishGame.roundNumber * 50;
+    } else if (percentage >= 60) {
+        emoji = '💪';
+        title = 'BEN FATTO!';
+        encouragement = 'Stai migliorando, continua così!';
+        bonusPoints = EnglishGame.roundNumber * 40;
+    } else {
+        emoji = '📚';
+        title = 'CONTINUA A PROVARE!';
+        encouragement = 'Ogni errore è un\'opportunità per imparare!';
+        bonusPoints = EnglishGame.roundNumber * 30;
+    }
+
+    updateUserPoints(bonusPoints, 'english');
+
+    const message = `
+        ${emoji}<br><br>
+        <strong>${title}</strong><br><br>
+        Round ${EnglishGame.roundNumber} Completato!<br><br>
+        <div style="font-size: 3em; font-weight: bold; color: #ffd93d; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+            ${percentage}%
+        </div>
+        <br>
+        ${correct} corrette su ${total}<br><br>
+        ${encouragement}<br><br>
+        🏆 Bonus Round: +${bonusPoints} punti!<br><br>
+        🌟 Inizia il Round ${EnglishGame.roundNumber + 1}!
+    `;
+
+    showCelebration(message);
+
+    // Avanza al prossimo round dopo 4 secondi (più tempo per leggere)
+    setTimeout(() => {
+        EnglishGame.roundNumber++;
+        EnglishGame.roundProgress = 0;
+        EnglishGame.roundCorrectAnswers = 0;
+        EnglishGame.roundWrongAnswers = 0;
+
+        // Reset array domande già chieste per il nuovo round
+        EnglishGame.askedThisRound = [];
+
+        updateRoundProgress('english');
+
+        // Nascondi celebration
+        const celebration = document.getElementById('english-celebration');
+        if (celebration) {
+            celebration.classList.add('hidden');
+        }
+
+        // Torna alla selezione tema per scegliere di nuovo
+        document.getElementById('english-game-area').classList.add('hidden');
+        document.getElementById('english-topic-selector').classList.remove('hidden');
+        EnglishGame.currentTopic = null;
+    }, 4000);
 }
 
 // Resetta round quando si inizia un nuovo gioco
