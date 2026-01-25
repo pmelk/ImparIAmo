@@ -5,6 +5,7 @@
 function updateRoundProgress(gameType) {
     const game = gameType === 'math' ? MathGame :
                  gameType === 'tabelline' ? TabellineGame :
+                 gameType === 'numberfriends' ? NumberFriendsGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame :
@@ -43,6 +44,7 @@ function updateRoundProgress(gameType) {
 function showRoundComplete(gameType) {
     const game = gameType === 'math' ? MathGame :
                  gameType === 'tabelline' ? TabellineGame :
+                 gameType === 'numberfriends' ? NumberFriendsGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame :
@@ -167,6 +169,19 @@ function incrementEnglishProgress() {
     }
 }
 
+// Incrementa progresso per il gioco Amici del...
+function incrementNumberFriendsProgress() {
+    if (!NumberFriendsGame.roundProgress) NumberFriendsGame.roundProgress = 0;
+    if (NumberFriendsGame.roundProgress < 10) {
+        NumberFriendsGame.roundProgress++;
+        updateRoundProgress('numberfriends');
+
+        if (NumberFriendsGame.roundProgress === 10) {
+            showRoundComplete('numberfriends');
+        }
+    }
+}
+
 // Mostra completamento round per gioco Inglese con statistiche
 function showEnglishRoundComplete() {
     const correct = EnglishGame.roundCorrectAnswers;
@@ -259,6 +274,7 @@ function showEnglishRoundComplete() {
 function resetRound(gameType) {
     const game = gameType === 'math' ? MathGame :
                  gameType === 'tabelline' ? TabellineGame :
+                 gameType === 'numberfriends' ? NumberFriendsGame :
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame :
@@ -302,6 +318,11 @@ window.addEventListener('DOMContentLoaded', function() {
         EnglishGame.roundProgress = 0;
     }
 
+    if (typeof NumberFriendsGame !== 'undefined') {
+        NumberFriendsGame.roundNumber = 1;
+        NumberFriendsGame.roundProgress = 0;
+    }
+
     // Override funzioni init per resettare il round
     setTimeout(function() {
         if (typeof initMathGame !== 'undefined') {
@@ -317,6 +338,14 @@ window.addEventListener('DOMContentLoaded', function() {
             window.initTabellineGame = function() {
                 originalInitTabellineGame();
                 resetRound('tabelline');
+            };
+        }
+
+        if (typeof initNumberFriendsGame !== 'undefined') {
+            const originalInitNumberFriendsGame = initNumberFriendsGame;
+            window.initNumberFriendsGame = function() {
+                originalInitNumberFriendsGame();
+                resetRound('numberfriends');
             };
         }
 

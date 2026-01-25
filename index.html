@@ -225,6 +225,10 @@
                                 <span class="game-points" id="profile-game-tabelline">0</span>
                             </div>
                             <div class="stat-row">
+                                <span class="game-name">🤝 Amici del...</span>
+                                <span class="game-points" id="profile-game-numberfriends">0</span>
+                            </div>
+                            <div class="stat-row">
                                 <span class="game-name">🔤 Lettere e Parole</span>
                                 <span class="game-points" id="profile-game-letters">0</span>
                             </div>
@@ -413,6 +417,58 @@
             </div>
         </div>
 
+        <!-- Gioco Amici del... -->
+        <div id="numberfriends-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header">
+                    <button class="btn-back">← Menu</button>
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="numberfriends-points">0</span></span>
+                        <span class="stat">Round <span id="numberfriends-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <div class="round-progress">
+                    <div class="progress-info">
+                        <span>Progresso Round</span>
+                        <span><span id="numberfriends-round-current">0</span>/10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="numberfriends-progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">🤝 Amici del...</h2>
+
+                <!-- Selezione numero target -->
+                <div class="target-selector">
+                    <label for="numberfriends-target-select" class="target-label">Scegli il numero:</label>
+                    <select id="numberfriends-target-select" class="target-select">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                        <option value="60">60</option>
+                        <option value="70">70</option>
+                        <option value="80">80</option>
+                        <option value="90">90</option>
+                        <option value="100" selected>100</option>
+                    </select>
+                </div>
+
+                <div id="numberfriends-question" class="question-box">
+                    <p class="question-text"></p>
+                </div>
+
+                <div id="numberfriends-answers" class="answers-grid"></div>
+
+                <div id="numberfriends-feedback" class="feedback hidden"></div>
+
+                <div id="numberfriends-celebration" class="celebration hidden"></div>
+            </div>
+        </div>
+
         <!-- Gioco Lettere -->
         <div id="letters-game-screen" class="screen">
             <div class="container">
@@ -588,7 +644,7 @@
 
                     <!-- Input per scrivere la risposta (tema mesi) -->
                     <div id="english-input-container" class="english-input-container hidden">
-                        <input type="text" id="english-text-input" class="english-text-input" placeholder="Scrivi la parola in inglese..." maxlength="20" autocomplete="off">
+                        <input type="text" id="english-text-input" class="english-text-input" placeholder="Scrivi la parola in inglese..." maxlength="20" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                         <button id="english-check-btn" class="btn btn-primary">✓ Verifica</button>
                     </div>
 

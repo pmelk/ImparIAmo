@@ -1469,6 +1469,56 @@ h1 {
     text-align: center;
 }
 
+.selector-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #E65100;
+    margin: 15px 0 10px 0;
+    text-align: center;
+}
+
+/* Target Selector per gioco Amici del... */
+.target-selector {
+    text-align: center;
+    margin: 20px 0;
+    padding: 15px;
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    border-radius: 15px;
+    border: 3px solid #2196F3;
+}
+
+.target-label {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1565C0;
+    margin-bottom: 10px;
+}
+
+.target-select {
+    padding: 12px 25px;
+    font-size: 24px;
+    font-weight: 700;
+    border: 3px solid #2196F3;
+    border-radius: 12px;
+    background: white;
+    color: #1565C0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+}
+
+.target-select:hover {
+    background: #E3F2FD;
+    border-color: #1976D2;
+    transform: scale(1.05);
+}
+
+.target-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.3);
+}
+
 .operations-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
