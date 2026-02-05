@@ -237,6 +237,10 @@
                                 <span class="game-points" id="profile-game-imageguess">0</span>
                             </div>
                             <div class="stat-row">
+                                <span class="game-name">✏️ Ortografia</span>
+                                <span class="game-points" id="profile-game-spelling">0</span>
+                            </div>
+                            <div class="stat-row">
                                 <span class="game-name">🧩 Sfida di Logica</span>
                                 <span class="game-points" id="profile-game-logic">0</span>
                             </div>
@@ -583,6 +587,69 @@
 
                     <div id="imageguess-feedback" class="feedback hidden"></div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Gioco Ortografia -->
+        <div id="spelling-game-screen" class="screen">
+            <div class="container">
+                <div class="game-header-compact">
+                    <button class="btn-back">← Menu</button>
+
+                    <!-- Barra progresso compatta in header -->
+                    <div class="round-progress-compact">
+                        <div class="progress-bar-compact">
+                            <div id="spelling-progress-fill" class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text"><span id="spelling-round-current">0</span>/10</span>
+                    </div>
+
+                    <div class="game-stats">
+                        <span class="stat">⭐ <span id="spelling-points">0</span></span>
+                        <span class="stat">Round <span id="spelling-round-number">1</span></span>
+                    </div>
+                </div>
+
+                <h2 class="game-title-small">✏️ Ortografia</h2>
+
+                <!-- Selezione categorie ortografia con checkbox -->
+                <div id="spelling-categories-selector" class="operations-selector">
+                    <p class="selector-title">Scegli le categorie da includere:</p>
+                    <div class="operations-grid">
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="cat-doppie" checked>
+                            <span class="operation-label">📝 Doppie</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="cat-accenti" checked>
+                            <span class="operation-label">✍️ Accenti</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="cat-cqu">
+                            <span class="operation-label">🔤 CQ, QU, CQU</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="cat-gn-gli">
+                            <span class="operation-label">🔡 GN/GNI, GL/GLI/LI</span>
+                        </label>
+                        <label class="operation-checkbox">
+                            <input type="checkbox" id="cat-mp-np">
+                            <span class="operation-label">🔠 MP, NP, MB, NB</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="spelling-container">
+                    <p class="instruction">Qual è la scrittura corretta?</p>
+
+                    <div id="spelling-emoji" class="emoji-display-large"></div>
+
+                    <div id="spelling-answers" class="answers-grid-inline"></div>
+
+                    <div id="spelling-feedback" class="feedback hidden"></div>
+                </div>
+
+                <div id="spelling-celebration" class="celebration hidden"></div>
             </div>
         </div>
 

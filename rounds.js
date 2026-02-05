@@ -9,6 +9,7 @@ function updateRoundProgress(gameType) {
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame :
+                 gameType === 'spelling' ? SpellingGame :
                  gameType === 'english' ? EnglishGame : null;
 
     const progress = game.roundProgress || 0;
@@ -48,6 +49,7 @@ function showRoundComplete(gameType) {
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame :
+                 gameType === 'spelling' ? SpellingGame :
                  gameType === 'english' ? EnglishGame : null;
 
     const bonusPoints = game.roundNumber * 50;
@@ -150,6 +152,19 @@ function incrementImageGuessProgress() {
 
         if (ImageGuessGame.roundProgress === 10) {
             showRoundComplete('imageguess');
+        }
+    }
+}
+
+// Incrementa progresso per il gioco Ortografia
+function incrementSpellingProgress() {
+    if (!SpellingGame.roundProgress) SpellingGame.roundProgress = 0;
+    if (SpellingGame.roundProgress < 10) {
+        SpellingGame.roundProgress++;
+        updateRoundProgress('spelling');
+
+        if (SpellingGame.roundProgress === 10) {
+            showRoundComplete('spelling');
         }
     }
 }
@@ -278,6 +293,7 @@ function resetRound(gameType) {
                  gameType === 'letters' ? LettersGame :
                  gameType === 'logic' ? LogicGame :
                  gameType === 'imageguess' ? ImageGuessGame :
+                 gameType === 'spelling' ? SpellingGame :
                  gameType === 'english' ? EnglishGame : null;
 
     game.roundNumber = 1;
@@ -321,6 +337,11 @@ window.addEventListener('DOMContentLoaded', function() {
     if (typeof NumberFriendsGame !== 'undefined') {
         NumberFriendsGame.roundNumber = 1;
         NumberFriendsGame.roundProgress = 0;
+    }
+
+    if (typeof SpellingGame !== 'undefined') {
+        SpellingGame.roundNumber = 1;
+        SpellingGame.roundProgress = 0;
     }
 
     // Override funzioni init per resettare il round
@@ -370,6 +391,14 @@ window.addEventListener('DOMContentLoaded', function() {
             window.initImageGuessGame = function() {
                 originalInitImageGuessGame();
                 resetRound('imageguess');
+            };
+        }
+
+        if (typeof initSpellingGame !== 'undefined') {
+            const originalInitSpellingGame = initSpellingGame;
+            window.initSpellingGame = function() {
+                originalInitSpellingGame();
+                resetRound('spelling');
             };
         }
 
