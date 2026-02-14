@@ -551,6 +551,32 @@ h1 {
     100% { transform: scale(1); opacity: 1; }
 }
 
+/* Bottone Continua per Feedback Overlay */
+.continue-btn {
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    color: white;
+    padding: 15px 40px;
+    font-size: 0.7em;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    font-family: inherit;
+}
+
+.continue-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #5eddd4 0%, #54b09d 100%);
+}
+
+.continue-btn:active {
+    transform: translateY(0);
+}
+
 /* Letters Game */
 .letters-container {
     max-width: 600px;
